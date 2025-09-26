@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { toast } from "sonner-native";
 import LayoutWithBg from "@/components/common/LayoutWithBG";
+import { showToastWithWiggle } from "@/utils/showToastWithWiggle";
 
 type LoginViewProps = {
   type: string;
@@ -16,14 +17,19 @@ type LoginViewProps = {
 };
 
 const LoginView: React.FC<LoginViewProps> = ({ type, mutate, isLoading }) => {
-  const [userId, setUsername] = useState<string | null>("UID789616");
+  const [userId, setUsername] = useState<string | null>("admin@gmail.com");
   const [password, setPassword] = useState<string | null>("12345678");
+
+
   const handleLogin = () => {
     if (!userId || !password) {
-      toast.error("Please enter userId and password");
+      showToastWithWiggle({
+        message: "Please enter Username and Password",
+        variant: "error",
+      });
       return;
     }
-    mutate({ userId: userId, password });
+    mutate({ userId, password });
   };
 
   return (

@@ -14,7 +14,7 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <StatusBar style="light" />
+          <StatusBar style="dark" />
           <Stack
             screenOptions={{
               headerShown: false,
@@ -25,7 +25,7 @@ export default function RootLayout() {
             <Stack.Screen name="index" />
           </Stack>
           <View style={styles.toasterContainer}>
-            <Toaster closeButton richColors />
+            <Toaster closeButton richColors autoWiggleOnUpdate />
           </View>
         </GestureHandlerRootView>
       </QueryClientProvider>

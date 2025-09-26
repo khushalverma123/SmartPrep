@@ -12,17 +12,20 @@ const axiosFetch = async <T>({
   headers = {},
   ...rest
 }: AxiosFetchConfig): Promise<T> => {
-  const token = useAuthStore.getState().access;
+  const token = useAuthStore.getState().token;
 
   const defaultHeaders = {
     "Content-Type": "application/json",
-    ...(token && !url.startsWith("http") ? { Authorization: `Bearer ${token}` } : {}),
+    ...(token && !url.startsWith("http")
+      ? { Authorization: `Bearer ${token}` }
+      : {}),
   };
 
-  const baseUrl = process.env.EXPO_PUBLIC_BACKEND_URL ?? "http://192.168.0.131:8080/api/v1";
+  const baseUrl =
+    process.env.EXPO_PUBLIC_BACKEND_URL ?? "";
 
   const fullUrl = url.startsWith("http") ? url : `${baseUrl}${url}`;
-
+  console.log("Backend URL:", fullUrl);
   try {
     const response: AxiosResponse<T> = await axios.request({
       url: fullUrl,

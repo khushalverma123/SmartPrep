@@ -7,7 +7,7 @@ class AuthService {
         url: apis.AUTH_MODULE.LOGIN,
         method: "POST",
         data: {
-          userId,
+          email: userId,
           password,
         },
       });
