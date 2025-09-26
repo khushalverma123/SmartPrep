@@ -19,14 +19,11 @@ interface AuthStore {
   refresh: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  isOtpSent: boolean;
-  isOtpVerifying: boolean;
   isAdmin: boolean;
   isTeacher: boolean;
   isParent: boolean;
   isStudent: boolean;
   setUser: (user: Partial<User>) => void;
-  sentOtp: (user: Partial<User>) => void;
   setIsAdmin: (isAdmin: boolean) => void;
   setIsTeacher: (isTeacher: boolean) => void;
   setIsParent: (isParent: boolean) => void;
@@ -45,8 +42,6 @@ export const useAuthStore = create<AuthStore>()(
       refresh: null,
       isAuthenticated: false,
       isLoading: false,
-      isOtpSent: false,
-      isOtpVerifying: false,
       isAdmin: false,
       isTeacher: false,
       isParent: false,
@@ -55,9 +50,6 @@ export const useAuthStore = create<AuthStore>()(
         set((state) => ({
           user: { ...state.user, ...user },
         })),
-      sentOtp: (user) => {
-        set({ isOtpSent: true, user });
-      },
       setIsAdmin: (isAdmin) => {
         set({ isAdmin });
       },
