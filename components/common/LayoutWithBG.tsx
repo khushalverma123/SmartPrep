@@ -7,13 +7,13 @@ import {
 } from "react-native";
 
 import { ReactNode } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function LayoutWithBg({
   noPadding = false,
   bgColor = false,
   children,
-  noImage= false,
+  noImage = false,
 }: {
   noPadding?: boolean;
   noImage?: boolean;
@@ -22,11 +22,10 @@ export default function LayoutWithBg({
 }) {
   const height = Dimensions.get("screen").height;
   const isIOS = Platform.OS === "ios";
+  const insets = useSafeAreaInsets();
+
   return (
-    <View
-      className="flex-1 w-screen"
-   
-    >
+    <View className="flex-1 w-screen">
       <ImageBackground
         source={noImage ? undefined : require("@/assets/images/Main-BG.jpg")}
         resizeMode="cover"
@@ -38,6 +37,8 @@ export default function LayoutWithBg({
               isIOS ? "flex-1" : "h-[100vh]"
             } ${noPadding ? "" : "px-4"} ${bgColor ? "bg-[#F5F9FF]" : ""}`}
             behavior="padding"
+            // Add bottom padding here dynamically with safe area inset
+            style={{ paddingBottom: noPadding ? 0 : insets.bottom + 25 }}
           >
             {children}
           </KeyboardAvoidingView>
